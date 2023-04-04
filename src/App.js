@@ -11,9 +11,9 @@ function App() {
     const {status, error} = useSelector(state => state.todos);
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(fetchTodos());
-    }, [dispatch]);
+    // useEffect(() => {
+    //     dispatch(fetchTodos());
+    // }, [dispatch]);
 
     const addTask = () => {
         dispatch(addTodo(text));
