@@ -38,7 +38,8 @@ export const deleteTodo = createAsyncThunk(
 export const toggleDone = createAsyncThunk(
     'todos/toggleDone',
     async function(id, {rejectWithValue, dispatch, getState}) {
-        const todo = getState().todos.todos.find(todo => todo.id === id);
+        const todo = getState().persistedReducer.todos.todos.find(todo => todo.id === id);
+
         try {
             const response = await fetch(`https://jsonplaceholder.typicode.com/todos/${id}`, {
                 method: 'PATCH',
@@ -98,7 +99,7 @@ const toDoSlice = createSlice({
     initialState: {
         todos: [],
         status: null,
-        error: null
+        error: null,
     },
     reducers: {
         addToDo(state, action) {

@@ -5,10 +5,13 @@ import TextDo from "./component/textDo";
 import {useDispatch, useSelector} from "react-redux";
 import {addTodo, fetchTodos} from "./component/store/toDoSlice";
 import './component/styles.css'
+import ThemeSelector from "./component/themeReducer";
 
 function App() {
     const [text, setText] = useState('');
-    const {status, error} = useSelector(state => state.todos);
+    // console.log(useSelector(state => state));
+    // return;
+    const {status, error} = useSelector(state => state.persistedReducer.todos.todos);
     const dispatch = useDispatch();
 
     // useEffect(() => {
@@ -22,6 +25,7 @@ function App() {
 
     return (
         <div className="App">
+            <ThemeSelector />
             <TextDo text={text} setText={setText} addToDo={addTask}/>
 
             {status === 'loading' && <h2>Loading....</h2>}

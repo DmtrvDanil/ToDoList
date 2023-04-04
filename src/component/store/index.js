@@ -1,5 +1,6 @@
 import {combineReducers, configureStore} from "@reduxjs/toolkit";
 import toDoReducer from './toDoSlice';
+import themeReducer from './themeSlice';
 import { persistStore, persistReducer,
     FLUSH,
     REHYDRATE,
@@ -10,7 +11,7 @@ import { persistStore, persistReducer,
 import storage from 'redux-persist/lib/storage'
 
 
-const rootReducer = combineReducers({todos: toDoReducer});
+const rootReducer = combineReducers({todos: toDoReducer, theme: themeReducer});
 
 const persistConfig = {
     key: 'root',
@@ -20,7 +21,10 @@ const persistConfig = {
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = configureStore({
-    reducer: persistedReducer,
+    reducer: {
+        persistedReducer,
+        themeReducer
+    },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({
             serializableCheck: {
